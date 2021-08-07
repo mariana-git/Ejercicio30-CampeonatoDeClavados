@@ -21,8 +21,8 @@ namespace Ejercicio30_CampeonatoDeClavados
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            gbDatos.Visible = false;
-
+            txtCantidad.Focus();
+            gbDatos.Enabled = false;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -32,12 +32,15 @@ namespace Ejercicio30_CampeonatoDeClavados
             {
                 n = Convert.ToInt32(txtCantidad.Text);
                 txtCantidad.Enabled = false;
-                gbDatos.Visible = true;
-                lblParticipante.Text = "Participante Nº 1";
-
+                btnAceptar.Enabled = false;
+                gbDatos.Enabled = true;
+                txtNombre.Focus();
             }
-            else MessageBox.Show("Debe ingresar la cantidad de participantes");
-
+            else
+            {
+                MessageBox.Show("Debe ingresar la cantidad de participantes", "ATENCION");
+                txtCantidad.Focus();
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -47,6 +50,7 @@ namespace Ejercicio30_CampeonatoDeClavados
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            //Limpio los controles y rehabilito botones y campos
             foreach (Control control in Controls)
             {
                 if (control is TextBox) control.Text = "";
@@ -59,43 +63,54 @@ namespace Ejercicio30_CampeonatoDeClavados
                     }
                 }
             }
+            btnAgregar.Enabled = true;
+            btnAceptar.Enabled = true;
             txtCantidad.Enabled = true;
-            gbDatos.Visible = false;
             txtCantidad.Focus();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < n; i++)
+            //verificio que esten todos los campos requeridos cargados antes de ejecutar el código
+            bool completo = true;
+            foreach (Control control in gbDatos.Controls)
             {
-                //valido que hayan cargado todas las puntuaciones para ejecutar el código
-                if (!(txtPunt1.Text == string.Empty || txtPunt2.Text == string.Empty || txtPunt3.Text == string.Empty || txtPunt4.Text == string.Empty || txtPunt5.Text == string.Empty))
+                if (control is TextBox)
                 {
-                    lblParticipante.Text = $"Participante Nº {i + 2}";
-
-                    double p1 = Convert.ToDouble(txtPunt1.Text);
-                    double p2 = Convert.ToDouble(txtPunt2.Text);
-                    double p3 = Convert.ToDouble(txtPunt3.Text);
-                    double p4 = Convert.ToDouble(txtPunt4.Text);
-                    double p5 = Convert.ToDouble(txtPunt5.Text);
-
-                    double[] Puntuaciones = new double[] { p1, p2, p3, p4, p5 };
-                    Array.Sort(Puntuaciones);
-
-                    double promedio = (Puntuaciones[1] + Puntuaciones[2] + Puntuaciones[3]) / 3;
-                    string nombre = txtNombre.Text;
-
-                    lbxRanking.Items.Add($"{promedio}    {nombre}");
-                    lbxRanking.Sorted = true;
-
-                    foreach (Control control in gbDatos.Controls)
-                    {
-                        if (control is TextBox) control.Text = "";
-                    }
+                    if (control.Text == string.Empty) completo = false;
                 }
-                else MessageBox.Show("Debe ingresar TODAS las puntuaciones de los Jurados");
             }
-            gbDatos.Enabled = false;
+            if (completo)
+            {
+                //armo un array con las notas, solo sumo y promedio las 3 centrales
+                double p1 = Convert.ToDouble(txtPunt1.Text);
+                double p2 = Convert.ToDouble(txtPunt2.Text);
+                double p3 = Convert.ToDouble(txtPunt3.Text);
+                double p4 = Convert.ToDouble(txtPunt4.Text);
+                double p5 = Convert.ToDouble(txtPunt5.Text);
+
+                double[] Puntuaciones = new double[] { p1, p2, p3, p4, p5 };
+                Array.Sort(Puntuaciones);
+                double promedio = (Puntuaciones[1] + Puntuaciones[2] + Puntuaciones[3]) / 3;
+
+                string nombre = txtNombre.Text;
+
+                //Agrego los datos en el listbox y lo ordeno
+                lbxRanking.Items.Add($"PUNTAJE:  {promedio}  -  {nombre}");
+                lbxRanking.Sorted = true;
+
+                //limpio los campos para cargar nuevos participantes
+                foreach (Control control in gbDatos.Controls)
+                {
+                    if (control is TextBox) ((TextBox)control).Text = string.Empty;                        
+                }
+
+                //decremento la variable cantidad para no permitir cargar mas competidores que los indicados al principio
+                n--;
+            } else MessageBox.Show("Complete todos los campos", "ERROR");
+            
+            //verifico si se cargaron todos los participantes indicados al comenzar, inhabilito el groupbox
+            if (n == 0) gbDatos.Enabled = false;
         }
     }
 }
