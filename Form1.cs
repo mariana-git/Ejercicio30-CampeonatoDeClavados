@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -23,6 +23,9 @@ namespace Ejercicio30_CampeonatoDeClavados
         {
             txtCantidad.Focus();
             gbDatos.Enabled = false;
+            lstvwPosiciones.View = View.Details;
+            lstvwPosiciones.Columns.Add("PUNTAJE",80, HorizontalAlignment.Center);
+            lstvwPosiciones.Columns.Add("NOMBRE", -2, HorizontalAlignment.Center);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -50,19 +53,11 @@ namespace Ejercicio30_CampeonatoDeClavados
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            //Limpio los controles y rehabilito botones y campos
-            foreach (Control control in Controls)
-            {
-                if (control is TextBox) control.Text = "";
-                if (control is GroupBox)
-                {
-                    foreach (Control controlGrup in control.Controls)
-                    {
-                        if (controlGrup is TextBox) controlGrup.Text = "";
-                        if (controlGrup is ListBox) ((ListBox)controlGrup).Items.Clear();
-                    }
-                }
-            }
+            //Limpio los controles instanciando la clase afin
+            var limpiar = new Utiles();
+            limpiar.LimpiarFormulario(this);
+            
+            //rehabilito botones y campos
             btnAgregar.Enabled = true;
             btnAceptar.Enabled = true;
             txtCantidad.Enabled = true;
@@ -93,11 +88,14 @@ namespace Ejercicio30_CampeonatoDeClavados
                 Array.Sort(Puntuaciones);
                 double promedio = (Puntuaciones[1] + Puntuaciones[2] + Puntuaciones[3]) / 3;
 
-                string nombre = txtNombre.Text;
+                //Agrego los datos en el listview
+                ListViewItem participante = new ListViewItem(promedio.ToString());
+                participante.SubItems.Add(txtNombre.Text);
+                lstvwPosiciones.Items.Add(participante);
 
-                //Agrego los datos en el listbox y lo ordeno
-                lbxRanking.Items.Add($"PUNTAJE:  {promedio}  -  {nombre}");
-                lbxRanking.Sorted = true;
+                //ordeno por puntaje
+                lstvwPosiciones.Sorting = SortOrder.Descending;
+                lstvwPosiciones.Sort();
 
                 //limpio los campos para cargar nuevos participantes
                 foreach (Control control in gbDatos.Controls)
@@ -107,10 +105,54 @@ namespace Ejercicio30_CampeonatoDeClavados
 
                 //decremento la variable cantidad para no permitir cargar mas competidores que los indicados al principio
                 n--;
+
             } else MessageBox.Show("Complete todos los campos", "ERROR");
             
             //verifico si se cargaron todos los participantes indicados al comenzar, inhabilito el groupbox
             if (n == 0) gbDatos.Enabled = false;
+        }
+        //instancio la clase que permita solo cargar numeros en los txt de puntajes
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        private void txtPunt1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        private void txtPunt2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        private void txtPunt3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        private void txtPunt4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        private void txtPunt5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloNumeros(e);
+        }
+
+        //instancio la clase que permita solo cargar solo letras en el nombre del participante
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var numeros = new Utiles();
+            numeros.SoloLetras(e);
         }
     }
 }

@@ -47,8 +47,8 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt5 = new System.Windows.Forms.TextBox();
             this.lblParticipante = new System.Windows.Forms.Label();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.lstvwPosiciones = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbxRanking = new System.Windows.Forms.ListBox();
             this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +78,8 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(37, 23);
             this.txtCantidad.TabIndex = 1;
-            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // btnAceptar
             // 
@@ -102,7 +103,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(39, 488);
+            this.btnLimpiar.Location = new System.Drawing.Point(27, 488);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 11;
@@ -112,7 +113,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(240, 488);
+            this.btnSalir.Location = new System.Drawing.Point(270, 488);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 12;
@@ -145,6 +146,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt1.Size = new System.Drawing.Size(29, 23);
             this.txtPunt1.TabIndex = 5;
             this.txtPunt1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPunt1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPunt1_KeyPress);
             // 
             // txtNombre
             // 
@@ -153,6 +155,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtNombre.Size = new System.Drawing.Size(169, 23);
             this.txtNombre.TabIndex = 4;
             this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // txtPunt2
             // 
@@ -161,6 +164,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt2.Size = new System.Drawing.Size(29, 23);
             this.txtPunt2.TabIndex = 6;
             this.txtPunt2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPunt2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPunt2_KeyPress);
             // 
             // txtPunt3
             // 
@@ -169,6 +173,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt3.Size = new System.Drawing.Size(29, 23);
             this.txtPunt3.TabIndex = 7;
             this.txtPunt3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPunt3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPunt3_KeyPress);
             // 
             // txtPunt4
             // 
@@ -177,6 +182,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt4.Size = new System.Drawing.Size(29, 23);
             this.txtPunt4.TabIndex = 8;
             this.txtPunt4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPunt4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPunt4_KeyPress);
             // 
             // txtPunt5
             // 
@@ -185,6 +191,7 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.txtPunt5.Size = new System.Drawing.Size(29, 23);
             this.txtPunt5.TabIndex = 9;
             this.txtPunt5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPunt5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPunt5_KeyPress);
             // 
             // lblParticipante
             // 
@@ -199,8 +206,8 @@ namespace Ejercicio30_CampeonatoDeClavados
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.lstvwPosiciones);
             this.gbDatos.Controls.Add(this.label4);
-            this.gbDatos.Controls.Add(this.lbxRanking);
             this.gbDatos.Controls.Add(this.lblParticipante);
             this.gbDatos.Controls.Add(this.label3);
             this.gbDatos.Controls.Add(this.txtPunt5);
@@ -213,36 +220,36 @@ namespace Ejercicio30_CampeonatoDeClavados
             this.gbDatos.Controls.Add(this.txtPunt2);
             this.gbDatos.Location = new System.Drawing.Point(27, 146);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(310, 336);
+            this.gbDatos.Size = new System.Drawing.Size(318, 336);
             this.gbDatos.TabIndex = 3;
             this.gbDatos.TabStop = false;
+            // 
+            // lstvwPosiciones
+            // 
+            this.lstvwPosiciones.HideSelection = false;
+            this.lstvwPosiciones.Location = new System.Drawing.Point(6, 188);
+            this.lstvwPosiciones.Name = "lstvwPosiciones";
+            this.lstvwPosiciones.Size = new System.Drawing.Size(304, 128);
+            this.lstvwPosiciones.TabIndex = 21;
+            this.lstvwPosiciones.UseCompatibleStateImageBehavior = false;
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label4.Location = new System.Drawing.Point(12, 178);
+            this.label4.Location = new System.Drawing.Point(12, 159);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(276, 25);
+            this.label4.Size = new System.Drawing.Size(298, 25);
             this.label4.TabIndex = 13;
             this.label4.Text = "TABLA DE POSICIONES";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbxRanking
-            // 
-            this.lbxRanking.FormattingEnabled = true;
-            this.lbxRanking.ItemHeight = 15;
-            this.lbxRanking.Location = new System.Drawing.Point(12, 206);
-            this.lbxRanking.Name = "lbxRanking";
-            this.lbxRanking.Size = new System.Drawing.Size(276, 124);
-            this.lbxRanking.TabIndex = 21;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(371, 543);
+            this.ClientSize = new System.Drawing.Size(376, 543);
             this.Controls.Add(this.gbDatos);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnSalir);
@@ -280,8 +287,8 @@ namespace Ejercicio30_CampeonatoDeClavados
         private System.Windows.Forms.TextBox txtPunt5;
         private System.Windows.Forms.Label lblParticipante;
         private System.Windows.Forms.GroupBox gbDatos;
-        private System.Windows.Forms.ListBox lbxRanking;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView lstvwPosiciones;
     }
 }
 

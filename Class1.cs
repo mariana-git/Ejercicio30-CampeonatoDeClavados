@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Sueldos_3formularios_
+namespace Ejercicio30_CampeonatoDeClavados
 {
     class Utiles
     {
@@ -20,6 +20,7 @@ namespace Sueldos_3formularios_
                 if (control is TextBox) control.Text = "";
                 if (control is ComboBox) ((ComboBox)control).SelectedIndex = -1;
                 if (control is CheckBox) ((CheckBox)control).Checked = false;
+                if (control is ListView) ((ListView)control).Items.Clear();
                 if (control is GroupBox | control is Panel)
                 {
                     foreach (Control controlGrup in control.Controls)
@@ -27,6 +28,7 @@ namespace Sueldos_3formularios_
                         if (controlGrup is TextBox) controlGrup.Text = "";
                         if (controlGrup is ComboBox) ((ComboBox)controlGrup).SelectedIndex = -1;
                         if (controlGrup is CheckBox) ((CheckBox)controlGrup).Checked = false;
+                        if (controlGrup is ListView) ((ListView)controlGrup).Items.Clear();
                     }
                 }
             }
